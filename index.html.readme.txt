@@ -1,0 +1,122 @@
+===================================================
+Remove this if you want run a code
+
+Repository-name: even-g2-hello-world-spatial
+README.md: small demo to Even Hub Pilot Program - a small, early-access cohort for developers who want to ship real experiences on Even G2.
+ 
+
+evenhub.evenrealities.com
+===================================================
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even G2 Hello World + Reaaliaikainen Kello</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7); /* Simuloi lasien läpinäkyvää taustaa */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #00ff00; /* Even G2 -tyylinen vihreä monochrome */
+            overflow: hidden;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            text-align: center;
+            pointer-events: none;
+            text-shadow: 0 0 10px #00ff00;
+            animation: fadeIn 2s ease-in;
+        }
+
+        #notification {
+            position: fixed;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Reaaliaikainen kello */
+        #clock {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            font-size: 36px;
+            font-weight: bold;
+            opacity: 0.9;
+            pointer-events: none;
+            text-shadow: 0 0 8px #00ff00;
+            letter-spacing: 2px;
+        }
+
+        #date {
+            position: fixed;
+            top: 90px;
+            right: 60px;
+            font-size: 24px;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay">Hello Even G2!<br>Spatial Experience Demo</div>
+    <div id="notification">Pilot Program Application in Progress 🚀</div>
+
+    <!-- Reaaliaikainen kello ja päivämäärä -->
+    <div id="clock"></div>
+    <div id="date"></div>
+
+    <script>
+        // Päivitä kello sekunnin välein
+        function updateClock() {
+            const now = new Date();
+            
+            // Aika: HH:MM:SS
+            const time = now.toLocaleTimeString('fi-FI', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            // Päivämäärä: ke 31.12.2025 (esim.)
+            const dateOptions = { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' };
+            const date = now.toLocaleDateString('fi-FI', dateOptions)
+                           .replace(/,/g, '') // Poistaa pilkut
+                           .replace(/\./g, '.'); // Varmistaa pisteet
+
+            document.getElementById('clock').textContent = time;
+            document.getElementById('date').textContent = date;
+        }
+
+        // Alusta kello heti
+        updateClock();
+
+        // Päivitä joka sekunti
+        setInterval(updateClock, 1000);
+
+        // Vaihda keskitekstiä 5 sekunnin kuluttua (demo-dynamiikasta)
+        setTimeout(() => {
+            document.getElementById('overlay').innerHTML = 
+                'Tervetuloa Even Hubiin!<br>Rakentamassa tulevaisuutta';
+        }, 5000);
+
+        console.log('Even G2 Spatial Demo: Reaaliaikainen kello aktiivinen');
+    </script>
+</body>
+</html>
